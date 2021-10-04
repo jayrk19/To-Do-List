@@ -1,0 +1,42 @@
+<h1><span class="styling">To Do</span> List</h1>
+    <form class="input_div" method="POST" action="/api/create">
+      <input type="text" class="input" name="input" placeholder="Add Task" />
+      <button class="addButton">+</button>
+    </form>
+   
+    <div class="container">
+        {{#each data}}
+            <div class="item">
+                           
+                <form class="edit-form"  method="POST" action="/api/modify" style="display:inline-block">
+                    <input type="hidden" value="{{this._id}}" name="id" />
+                    <input type="text" name="changedItem" class="item_input" value="{{this.record}}" /> 
+                    <button class="editButton" type="submit" >EDIT</button>
+                </form>
+                <form  method="POST" action="/api/delete/{{this._id}}" style="display:inline-block">
+                      <button class="removeButton">REMOVE</button>
+                </form>
+            </div>
+        {{/each}}
+    </div>
+
+
+
+<script>
+   $(".edit-form").submit(function(e){
+        e.preventDefault();
+        thisForm = $(this);
+        $.ajax({
+            url: thisForm.attr("action"),
+            method : thisForm.attr("method"),
+            data : thisForm.serialize(),
+            success : function(res){
+                if(res.success){
+                    thisForm.find("input[name='changedItem']").val(res.newValue);
+                }else{
+                    alert("Something went wrong");
+                }
+            },
+        })
+    })
+</script>
