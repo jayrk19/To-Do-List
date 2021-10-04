@@ -11,7 +11,7 @@
                 <form class="edit-form"  method="POST" action="/api/modify" style="display:inline-block">
                     <input type="hidden" value="{{this._id}}" name="id" />
                     <input type="text" name="changedItem" class="item_input" value="{{this.record}}" /> 
-                    <button class="editButton" type="submit" >EDIT</button>
+                    <button class="editButton" type="submit" >SAVE</button>
                 </form>
                 <form  method="POST" action="/api/delete/{{this._id}}" style="display:inline-block">
                       <button class="removeButton">REMOVE</button>
