@@ -3,10 +3,16 @@ const express= require('express');
 var exphbs = require("express-handlebars");
 const mongoose = require('mongoose')
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const Todo = require('./models/todo')
 
-mongoose.connect('mongodb://localhost/firstmongo')
+const MONGODB_URI =
+  "mongodb+srv://test:6mT6Lmn9P2iXhPGd@cluster0.nkayd.mongodb.net/Todolist?retryWrites=true&w=majority";
+
+mongoose.connect(MONGODB_URI || 'mongodb://localhost/firstmongo',{
+  useNewUrlParser:true,
+  useUnifiedTopology:true
+})
 
 app.use(express.static(path.join(__dirname,"views")))
 
